@@ -1,0 +1,22 @@
+{
+  "name": "berlinjs-framework-api",
+  "version": "1.0.0",
+  "description":
+    "An API to power the applications built for the BerlinJS framework special meetup.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berlinjs/framework-special-2018-backend.git"
+  },
+  "keywords": [],
+  "author": "Dominik Kundel <dominik.kundel@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/berlinjs/framework-special-2018-backend/issues"
+  },
+  "homepage":
+    "https://github.com/berlinjs/framework-special-2018-backend#readme"
+}
