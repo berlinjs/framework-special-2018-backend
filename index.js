@@ -24,11 +24,13 @@ app.use((req, res, next) => {
 
   if (!DELAY || DELAY === 'false') {
     next();
+    return;
   }
 
   let delayInMs = parseInt(DELAY, 10);
   if (isNaN(delayInMs)) {
     next();
+    return;
   }
 
   delayInMs = Math.floor(Math.random() * delayInMs);
@@ -43,6 +45,9 @@ app.get('/', (req, res) => {
 });
 app.use('/meetup', meetupRouter);
 app.use('/user', userRouter);
+app.all('*', (req, res) => {
+  res.status(404).send('Only unicorns here 🦄');
+});
 
 async function initDb() {
   db = await lowdb(new FileAsync(DB_PATH));
