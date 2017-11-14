@@ -1,10 +1,15 @@
 {
-  "name": "berlinjs-framework-api",
+  "name": "berlin-meetup-api",
   "version": "1.0.0",
-  "description": "An API to power the applications built for the BerlinJS framework special meetup.",
+  "description":
+    "An API to power the applications built for the Berlin JS framework special meetup.",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "8.x"
   },
   "repository": {
     "type": "git",
@@ -16,7 +21,8 @@
   "bugs": {
     "url": "https://github.com/berlinjs/framework-special-2018-backend/issues"
   },
-  "homepage": "https://github.com/berlinjs/framework-special-2018-backend#readme",
+  "homepage":
+    "https://github.com/berlinjs/framework-special-2018-backend#readme",
   "dependencies": {
     "argon2": "^0.16.2",
     "body-parser": "^1.18.2",
