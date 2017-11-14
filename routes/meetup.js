@@ -7,6 +7,7 @@ const {
   MEETUP_MANDATORY_KEYS,
   MEETUP_VALID_KEYS
 } = require('../db');
+const { verifyLoginMiddleware } = require('../utils/auth');
 
 const router = Router();
 
@@ -15,12 +16,12 @@ const postBodyParsers = [
   bodyParser.urlencoded({ extended: false })
 ];
 
-router.get('/meetup', async (req, res) => {
+router.get('/', async (req, res) => {
   const data = await req.db.get(MEETUP_KEY).value();
   res.send({ data });
 });
 
-router.get('/meetup/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const data = await req.db
     .get(MEETUP_KEY)
@@ -34,68 +35,83 @@ router.get('/meetup/:id', async (req, res) => {
   res.send({ data });
 });
 
-router.post('/meetup', ...postBodyParsers, async (req, res) => {
-  const data = req.body;
-  for (let key of MEETUP_MANDATORY_KEYS) {
-    if (typeof data[key] !== 'string') {
-      res.status(400).send({
-        error: `Missing property ${key} or argument is not a string.`
-      });
-      return;
+router.post(
+  '/',
+  verifyLoginMiddleware,
+  ...postBodyParsers,
+  async (req, res) => {
+    const data = req.body;
+    for (let key of MEETUP_MANDATORY_KEYS) {
+      if (typeof data[key] !== 'string') {
+        res.status(400).send({
+          error: `Missing property ${key} or argument is not a string.`
+        });
+        return;
+      }
+    }
+
+    const entry = pick(data, MEETUP_VALID_KEYS);
+    try {
+      const meetup = await req.db
+        .get(MEETUP_KEY)
+        .insert(entry)
+        .write();
+      res.send({ data: meetup });
+    } catch (err) {
+      res.status(500).send({ error: 'Failed to write to database' });
     }
   }
+);
 
-  const entry = pick(data, MEETUP_VALID_KEYS);
-  try {
-    const meetup = await req.db
-      .get(MEETUP_KEY)
-      .insert(entry)
-      .write();
-    res.send({ data: meetup });
-  } catch (err) {
-    res.status(500).send({ error: 'Failed to write to database' });
-  }
-});
+router.patch(
+  '/:id',
+  verifyLoginMiddleware,
+  ...postBodyParsers,
+  async (req, res) => {
+    const newData = pick(req.body, MEETUP_VALID_KEYS);
+    const id = req.params.id;
 
-router.patch('/meetup/:id', ...postBodyParsers, async (req, res) => {
-  const newData = pick(req.body, MEETUP_VALID_KEYS);
-  const id = req.params.id;
-
-  try {
-    const data = await req.db
-      .get(MEETUP_KEY)
-      .updateById(id, newData)
-      .write();
-    res.send({ data });
-  } catch (err) {
-    res.status(500).send({ error: 'Failed to write to database' });
-  }
-});
-
-router.put('/meetup/:id', ...postBodyParsers, async (req, res) => {
-  const newData = pick(req.body, MEETUP_VALID_KEYS);
-  const id = req.params.id;
-
-  for (let key of MEETUP_MANDATORY_KEYS) {
-    if (typeof newData[key] !== 'string') {
-      res.status(400).send({
-        error: `Missing property ${key} or argument is not a string.`
-      });
-      return;
+    try {
+      const data = await req.db
+        .get(MEETUP_KEY)
+        .updateById(id, newData)
+        .write();
+      res.send({ data });
+    } catch (err) {
+      res.status(500).send({ error: 'Failed to write to database' });
     }
   }
+);
 
-  newData.id = id;
+router.put(
+  '/:id',
+  verifyLoginMiddleware,
+  ...postBodyParsers,
+  async (req, res) => {
+    const newData = pick(req.body, MEETUP_VALID_KEYS);
+    const id = req.params.id;
 
-  try {
-    const data = await req.db
-      .get(MEETUP_KEY)
-      .upsert(newData)
-      .write();
-    res.send({ data });
-  } catch (err) {
-    res.status(500).send({ error: 'Failed to write to database' });
+    for (let key of MEETUP_MANDATORY_KEYS) {
+      if (typeof newData[key] !== 'string') {
+        res.status(400).send({
+          error: `Missing property ${key} or argument is not a string.`
+        });
+        return;
+      }
+    }
+
+    newData.id = id;
+
+    try {
+      const data = await req.db
+        .get(MEETUP_KEY)
+        .upsert(newData)
+        .write();
+      res.send({ data });
+    } catch (err) {
+      res.status(500).send({ error: 'Failed to write to database' });
+    }
   }
-});
+);
 
 module.exports = router;

@@ -41,6 +41,8 @@ const MEETUP_VALID_KEYS = [
   'twitter'
 ];
 
+const USER_KEY = 'users';
+
 const DB_DEFAULTS = {
   [MEETUP_KEY]: MEETUP_ENTRIES
 };
@@ -52,6 +54,7 @@ module.exports = {
   MEETUP_KEY,
   MEETUP_MANDATORY_KEYS,
   MEETUP_VALID_KEYS,
+  USER_KEY,
   DB_DEFAULTS,
   DB_PATH
 };
