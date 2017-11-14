@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/berlinjs/framework-special-2018-backend#readme",
   "dependencies": {
+    "argon2": "^0.16.2",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
