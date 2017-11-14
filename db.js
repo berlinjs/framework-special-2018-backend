@@ -44,7 +44,8 @@ const MEETUP_VALID_KEYS = [
 const USER_KEY = 'users';
 
 const DB_DEFAULTS = {
-  [MEETUP_KEY]: MEETUP_ENTRIES
+  [MEETUP_KEY]: MEETUP_ENTRIES,
+  [USER_KEY]: []
 };
 
 const DB_PATH = '.data/db.json';
