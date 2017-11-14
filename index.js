@@ -19,6 +19,23 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  const DELAY = process.env.DELAY;
+
+  if (!DELAY || DELAY === 'false') {
+    next();
+  }
+
+  let delayInMs = parseInt(DELAY, 10);
+  if (isNaN(delayInMs)) {
+    next();
+  }
+
+  delayInMs = Math.floor(Math.random() * delayInMs);
+
+  setTimeout(() => next(), delayInMs);
+});
+
 app.get('/', (req, res) => {
   res.send({
     status: 'Running'
