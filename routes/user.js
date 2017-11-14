@@ -13,11 +13,10 @@ const postBodyParsers = [
 ];
 const router = Router();
 
-router.use(...postBodyParsers);
-
-router.post('/login', async (req, res) => {
+router.post('/login', ...postBodyParsers, async (req, res) => {
   if (!req.body) {
     res.status(400).send('Missing POST body parameters');
+    return;
   }
 
   for (let key of MANDATORY_REQUEST_PARAMS) {
@@ -50,9 +49,10 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', ...postBodyParsers, async (req, res) => {
   if (!req.body) {
     res.status(400).send('Missing POST body parameters');
+    return;
   }
 
   for (let key of MANDATORY_REQUEST_PARAMS) {
