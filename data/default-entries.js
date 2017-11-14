@@ -45,10 +45,13 @@ const DB_DEFAULTS = {
   [MEETUP_KEY]: MEETUP_ENTRIES
 };
 
+const DB_PATH = '.data/db.json';
+
 module.exports = {
   MEETUP_ENTRIES,
   MEETUP_KEY,
   MEETUP_MANDATORY_KEYS,
   MEETUP_VALID_KEYS,
-  DB_DEFAULTS
+  DB_DEFAULTS,
+  DB_PATH
 };
