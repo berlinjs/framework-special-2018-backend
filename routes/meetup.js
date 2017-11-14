@@ -6,7 +6,7 @@ const {
   MEETUP_KEY,
   MEETUP_MANDATORY_KEYS,
   MEETUP_VALID_KEYS
-} = require('../data/default-entries');
+} = require('../db');
 
 const router = Router();
 

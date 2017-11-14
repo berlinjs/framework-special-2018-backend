@@ -3,7 +3,7 @@ const lowdb = require('lowdb');
 const lodashId = require('lodash-id');
 const FileAsync = require('lowdb/adapters/FileAsync');
 
-const { DB_PATH, DB_DEFAULTS } = require('./data/default-entries');
+const { DB_PATH, DB_DEFAULTS } = require('./db');
 const meetupRouter = require('./routes/meetup');
 
 const PORT = process.env.PORT || 3000;
