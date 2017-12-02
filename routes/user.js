@@ -29,8 +29,9 @@ router.post('/login', ...postBodyParsers, async (req, res) => {
   try {
     const user = await req.db
       .get(USER_KEY)
-      .findWhere()
+      .find({ username: req.body.username })
       .value();
+
     if (!user) {
       res.status(403).send('Invalid username/password');
       return;
