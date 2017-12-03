@@ -62,7 +62,7 @@ const user = {
   password: 'super.secret.secret.password'
 }
 fetch(
-  'http://berlin-meetups.glitch.me/user/register',
+  'http://berlin-meetup.glitch.me/user/register',
   {
     method: 'POST',
     headers: {
@@ -106,7 +106,7 @@ const user = {
   password: 'super.secret.secret.password'
 }
 fetch(
-  'http://berlin-meetups.glitch.me/user/login',
+  'http://berlin-meetup.glitch.me/user/login',
   {
     method: 'POST',
     headers: {
@@ -137,7 +137,7 @@ Gets the list of all available meetups.
 
 **Example Request**
 ```js
-fetch('http://berlin-meetups.glitch.me/meetup')
+fetch('http://berlin-meetup.glitch.me/meetup')
   .then(resp => resp.json())
   .then(data => console.log(data));
 ```
@@ -158,7 +158,8 @@ fetch('http://berlin-meetups.glitch.me/meetup')
       "day": "Every 3rd Thursday",
       "nextMeetup": "2017-11-13T21:41:21.952Z",
       "twitter": "berlinjs",
-      "id": "9ea4cdb8-e18b-44c2-9b58-252395d7d5cd"
+      "id": "9ea4cdb8-e18b-44c2-9b58-252395d7d5cd",
+      "url": "https://www.meetup.com/Berlin-JS/"
     }
   ]
 }
@@ -175,7 +176,7 @@ Gets an instance of a meetup.
 **Example Request**
 ```js
 fetch(
-  'http://berlin-meetups.glitch.me/meetup/9ea4cdb8-e18b-44c2-9b58-252395d7d5cd'
+  'http://berlin-meetup.glitch.me/meetup/9ea4cdb8-e18b-44c2-9b58-252395d7d5cd'
 )
   .then(resp => resp.json())
   .then(data => console.log(data));
@@ -196,7 +197,8 @@ fetch(
     "day": "Every 3rd Thursday",
     "nextMeetup": "2017-11-13T21:41:21.952Z",
     "twitter": "berlinjs",
-    "id": "9ea4cdb8-e18b-44c2-9b58-252395d7d5cd"
+    "id": "9ea4cdb8-e18b-44c2-9b58-252395d7d5cd",
+    "url": "https://www.meetup.com/Berlin-JS/"
   }
 }
 ```
@@ -221,6 +223,7 @@ All body parameters need to be either `application/json` encoded or `x-www-form-
 | `coordinates` | `{ longitude: 'string', latitude: 'string' }` | Exact coordinates of the meetup place | ❌ |
 | `nextMeetup` | `string` | Timestamp for the next edition of the meetup. Should be parsable by `new Date()` | ❌ |
 | `twitter` | `string` | Username of the Twitter account of the meetup | ❌ |
+| `url` | `string` | The URL of a meetup | ❌ |
 
 **Example Request**
 ```js
@@ -230,10 +233,11 @@ const newEntry = {
   description: 'This is an awesome new meetup',
   day: 'Every day',
   time: '19:00',
-  twitter: 'onesiejs'
+  twitter: 'onesiejs',
+  url: 'https://onesiejs.com'
 }
 fetch(
-  'http://berlin-meetups.glitch.me/meetup',
+  'http://berlin-meetup.glitch.me/meetup',
   {
     method: 'POST',
     headers: {
@@ -257,7 +261,8 @@ fetch(
     "day": "Every day",
     "time": "19:00",
     "twitter": "onesiejs",
-    "id": "a532834c-c780-4ea1-95a1-294484ba3fcf"
+    "id": "a532834c-c780-4ea1-95a1-294484ba3fcf",
+    "url": "https://onesiejs.com/"
   }
 }
 ```
@@ -282,6 +287,7 @@ All body parameters need to be either `application/json` encoded or `x-www-form-
 | `coordinates` | `{ longitude: 'string', latitude: 'string' }` | Exact coordinates of the meetup place | ❌ |
 | `nextMeetup` | `string` | Timestamp for the next edition of the meetup. Should be parsable by `new Date()` | ❌ |
 | `twitter` | `string` | Username of the Twitter account of the meetup | ❌ |
+| `url` | `string` | The URL of a meetup | ❌ |
 
 **Example Request**
 ```js
@@ -290,10 +296,11 @@ const newEntry = {
   location: 'co.up',
   description: 'This is an awesome new meetup',
   day: 'Every Friday',
-  time: '19:00'
+  time: '19:00',
+  url: 'https://onesie.life'
 }
 fetch(
-  'http://berlin-meetups.glitch.me/meetup/a532834c-c780-4ea1-95a1-294484ba3fcf',
+  'http://berlin-meetup.glitch.me/meetup/a532834c-c780-4ea1-95a1-294484ba3fcf',
   {
     method: 'PUT',
     headers: {
@@ -316,7 +323,8 @@ fetch(
     "description": "This is an awesome new meetup",
     "day": "Every Friday",
     "time": "19:00",
-    "id": "a532834c-c780-4ea1-95a1-294484ba3fcf"
+    "id": "a532834c-c780-4ea1-95a1-294484ba3fcf",
+    "url": "https://onesie.life"
   }
 }
 ```
@@ -341,6 +349,7 @@ All body parameters need to be either `application/json` encoded or `x-www-form-
 | `coordinates` | `{ longitude: 'string', latitude: 'string' }` | Exact coordinates of the meetup place | ❌ |
 | `nextMeetup` | `string` | Timestamp for the next edition of the meetup. Should be parsable by `new Date()` | ❌ |
 | `twitter` | `string` | Username of the Twitter account of the meetup | ❌ |
+| `url` | `string` | The URL of a meetup | ❌ |
 
 **Example Request**
 ```js
@@ -348,7 +357,7 @@ const newEntry = {
   name: 'JS 💖 developers',
 }
 fetch(
-  'http://berlin-meetups.glitch.me/meetup/a532834c-c780-4ea1-95a1-294484ba3fcf',
+  'http://berlin-meetup.glitch.me/meetup/a532834c-c780-4ea1-95a1-294484ba3fcf',
   {
     method: 'PATCH',
     headers: {
@@ -371,7 +380,8 @@ fetch(
     "description": "This is an awesome new meetup",
     "day": "Every Friday",
     "time": "19:00",
-    "id": "a532834c-c780-4ea1-95a1-294484ba3fcf"
+    "id": "a532834c-c780-4ea1-95a1-294484ba3fcf",
+    "url": "https://onesie.life"
   }
 }
 ```
