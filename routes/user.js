@@ -37,15 +37,14 @@ router.post('/login', ...postBodyParsers, async (req, res) => {
       return;
     }
 
-    argon2.verify(user.hashedPassword, req.body.password).then(match => {
-      if (match) {
-        const token = createToken(user.username);
-        res.send({ token });
-      } else {
-        res.status(403).send('Invalid username/password');
-        return;
-      }
-    });
+    const match = await argon2.verify(user.hashedPassword, req.body.password);
+    if (match) {
+      const token = createToken(user.username);
+      res.send({ token });
+    } else {
+      res.status(403).send('Invalid username/password');
+      return;
+    }
   } catch (err) {
     console.error(err);
     res.status(500).send('Failed to perform login');
