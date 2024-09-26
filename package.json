@@ -25,9 +25,9 @@
     "https://github.com/berlinjs/framework-special-2018-backend#readme",
   "dependencies": {
     "argon2": "^0.16.2",
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.3",
-    "express": "^4.16.2",
+    "express": "^4.21.0",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "lodash-id": "^0.14.0",
